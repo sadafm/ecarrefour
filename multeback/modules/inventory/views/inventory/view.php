@@ -1,0 +1,54 @@
+<?php
+
+use yii\helpers\Html;
+use kartik\detail\DetailView;
+use kartik\datecontrol\DateControl;
+
+/**
+ * @var yii\web\View $this
+ * @var multebox\models\Inventory $model
+ */
+
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Inventories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="inventory-view">
+    <div class="page-header">
+        <h1><?= Html::encode($this->title) ?></h1>
+    </div>
+
+
+    <?= DetailView::widget([
+        'model' => $model,
+        'condensed' => false,
+        'hover' => true,
+        'mode' => Yii::$app->request->get('edit') == 't' ? DetailView::MODE_EDIT : DetailView::MODE_VIEW,
+        'panel' => [
+            'heading' => $this->title,
+            'type' => DetailView::TYPE_INFO,
+        ],
+        'attributes' => [
+            'id',
+            'product_id',
+            'vendor_id',
+            'stock',
+            'price_type',
+            //'attribute_values:ntext',
+            //'attribute_price:ntext',
+            'price',
+            'discount_type',
+            'discount',
+            'shipping_cost',
+            'added_by_id',
+            'sort_order',
+            'added_at',
+            'updated_at',
+        ],
+        'deleteOptions' => [
+            'url' => ['delete', 'id' => $model->id],
+        ],
+        'enableEditMode' => true,
+    ]) ?>
+
+</div>
